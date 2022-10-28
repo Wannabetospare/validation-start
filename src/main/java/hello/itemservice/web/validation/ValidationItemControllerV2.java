@@ -60,26 +60,30 @@ public class ValidationItemControllerV2 {
     }
 
     //@PostMapping("/add")
+    // BindingResult 의 위치는 무조건 검증대상 바로 뒤에 나와야 한다.
     public String addItemV1(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 
         // 검증 로직
         // Spring 의 StringUtils 라이브러리 사용
 
+        // 만약에 아이템이름을 가져올때 오류가 발생한다면, bingingResult 에서 FieldError 로 에러내용을  추가한다.
         if (!StringUtils.hasText(item.getItemName())) {
             bindingResult.addError(new FieldError("item", "itemName", "상품이름은 필수 입니다."));
         }
 
 
+        // 만약 아이템 가격이 null 이거나 1000 보다 작거나 1000000 보다 크다면, bingingResult 에서 FieldError 로 에러내용을  추가한다.
         if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
             bindingResult.addError(new FieldError("item", "price", "가격은 1,000 ~ 1,000,000 까지 허용합니다."));
         }
 
-
+        // 만약 아이템 재고가 null 이거나 9999 와 같거나 크다면, bingingResult 에서 FieldError 로 에러내용을  추가한다.
         if (item.getQuantity() == null || item.getQuantity() >= 9999) {
             bindingResult.addError(new FieldError("item", "quantity","수량은 최대 9,999 까지 허용합니다."));
         }
 
 
+        // 복합 에러 - 아이템의 가격이 null값이 아니고 아이템의 재고도 null값이 아니라면, 두 변수를 곱한값이 10000 보다 작다면, bingingResult 에서 FieldError 로 에러내용을  추가한다.
         if (item.getPrice() != null && item.getQuantity() != null) {
             int resultPrice = item.getPrice() * item.getQuantity();
             if (resultPrice < 10000) {
@@ -87,6 +91,7 @@ public class ValidationItemControllerV2 {
             }
         }
 
+        // 에러를 로그로 나오게 하려고 만들어 놓은 코₩
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
             return "validation/v2/addForm";
@@ -248,6 +253,7 @@ public class ValidationItemControllerV2 {
 
     @PostMapping("/add")
     public String addItemV6(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
             return "validation/v2/addForm";

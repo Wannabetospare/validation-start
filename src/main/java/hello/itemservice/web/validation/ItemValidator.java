@@ -7,6 +7,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+// 복잡한 검증을 하는 로직을 따로 만들어준 클래스
 @Component
 public class ItemValidator implements Validator {
 
