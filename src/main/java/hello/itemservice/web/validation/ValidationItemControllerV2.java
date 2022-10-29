@@ -31,6 +31,7 @@ public class ValidationItemControllerV2 {
 
     private final ItemValidator itemValidator;
 
+    // 검증기에 itemValidator 를 먹임
     @InitBinder
     public void info(WebDataBinder dataBinder) {
         log.info("init binder {}", dataBinder);
