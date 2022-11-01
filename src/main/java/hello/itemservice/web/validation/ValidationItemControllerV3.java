@@ -21,10 +21,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 
-@Slf4j
-@Controller
-@RequestMapping("/validation/v3/items")
-@RequiredArgsConstructor
+@Slf4j // 로그 관련
+@Controller // 컨트롤러
+@RequestMapping("/validation/v3/items") // 매핑주소 관련
+@RequiredArgsConstructor // final 값을 포함하는 생성자를 생성
 public class ValidationItemControllerV3 {
 
     private final ItemRepository itemRepository;

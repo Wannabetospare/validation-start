@@ -13,9 +13,11 @@ import javax.validation.constraints.NotNull;
 public class Item {
 
     // @NotNull(groups = UpdateCheck.class)
+    // null 허용 x
     private Long id;
 
     // @NotBlank(groups = {SaveCheck.class, UpdateCheck.class})
+    // 빈값 + 공백만 있는 경우 허용 x
     private String itemName;
 
     // @NotNull(groups = {SaveCheck.class, UpdateCheck.class})

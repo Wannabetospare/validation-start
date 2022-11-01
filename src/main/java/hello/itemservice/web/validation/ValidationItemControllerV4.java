@@ -48,7 +48,7 @@ public class ValidationItemControllerV4 {
     }
 
 
-
+    // 아이템 저장용 폼 클래스를 "item" 으로 취급하여 모델로 넘긴다.
     @PostMapping("/add")
     public String addItem(@Validated @ModelAttribute("item") ItemSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
@@ -81,9 +81,6 @@ public class ValidationItemControllerV4 {
 
 
 
-
-
-
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
@@ -91,8 +88,7 @@ public class ValidationItemControllerV4 {
         return "validation/v4/editForm";
     }
 
-
-
+    // 아이템 수정용 폼 클래스를 "item" 으로 취급하여 모델로 넘긴다.
     @PostMapping("/{itemId}/edit")
     public String edit(@PathVariable Long itemId, @Validated @ModelAttribute("item") ItemUpdateForm form, BindingResult bindingResult) {
 
@@ -102,7 +98,8 @@ public class ValidationItemControllerV4 {
             if (resultPrice < 10000) {
                 bindingResult.reject("totalPriceMin", new Object[]{10000,
                         resultPrice}, null);
-            } }
+            }
+        }
 
 
         if (bindingResult.hasErrors()) {

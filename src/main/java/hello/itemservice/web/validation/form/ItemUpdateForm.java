@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 
+// 아이템 수정용 폼 클래스
 @Data
 public class ItemUpdateForm {
 
