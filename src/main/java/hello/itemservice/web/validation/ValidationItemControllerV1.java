@@ -49,7 +49,7 @@ public class ValidationItemControllerV1 {
         // 검증 로직
         // Spring 의 StringUtils 라이브러리 사용
 
-        // 만약에 문자열을 가지고 있지 않다면 에러해쉬맵에 에러를 넣는다..
+        // 만약에 문자열을 가지고 있지 않다면, 에러해쉬맵에 에러를 넣는다.
         if (!StringUtils.hasText(item.getItemName())) {
             errors.put("itemName", "상품 이름은 필수입니다.");
         }
