@@ -160,6 +160,8 @@ public class ValidationItemControllerV2 {
         ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "itemName", "required");
 
 
+        // FieldError 에서 code 와 arguments 에 옵션을 추가해서 에러메시지를 생성한다.
+
         if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
             bindingResult.addError(new FieldError("item", "price", item.getPrice(), false, new String[]{"range.item.price"}, new Object[]{1000, 1000000}, null));
         }
@@ -200,6 +202,8 @@ public class ValidationItemControllerV2 {
         // 검증 로직
         // Spring 의 StringUtils 라이브러리 사용
 
+        // bindingResult.rejectValue 는 오류가 나는 필드명과 에러코드를 적어주면 된다.
+
         if (!StringUtils.hasText(item.getItemName())) {
            bindingResult.rejectValue("itemName", "required");
         }
@@ -237,6 +241,9 @@ public class ValidationItemControllerV2 {
     // @PostMapping("/add")
     public String addItemV5(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 
+
+        // 만들어 놓은 검증클래스를 불러와서 객체와 bindingResult 를 담는다.
+        // 검증할 객체(타겟)과 에러결과(bindingResult)를 담는다.
         itemValidator.validate(item, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -256,6 +263,12 @@ public class ValidationItemControllerV2 {
     @PostMapping("/add")
     public String addItemV6(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
+
+        // @Validated 검증기를 실행하라는 애노테이션이다.
+        // 매개변수에 넣으면 자동으로 검증하고, bindingResult 에 담아주기까지 해준다.
+        // WebDataBinder 에 등록한 검증기를 찾아서 실행한다. ->  어떤 검증기가 실행되어야 할지 구분이 필요하다. 이때 supports() 가 사용된다.
+
+
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
             return "validation/v2/addForm";
@@ -269,9 +282,7 @@ public class ValidationItemControllerV2 {
     }
 
 
-
-
-
+    
 
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {

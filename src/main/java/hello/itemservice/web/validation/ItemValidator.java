@@ -13,9 +13,14 @@ public class ItemValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
+
+        // isAssignableFrom = item 과 clazz 의 타입이 같은지 확인(자식클래스여도 통과)
+
         return Item.class.isAssignableFrom(clazz);
     }
 
+
+    // 검증할 객체(타겟) 과 에러를 매개변수로 담는다.
     @Override
     public void validate(Object target, Errors errors) {
 
