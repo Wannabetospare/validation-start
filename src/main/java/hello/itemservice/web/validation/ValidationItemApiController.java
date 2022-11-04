@@ -22,6 +22,7 @@ public class ValidationItemApiController {
 
         if (bindingResult.hasErrors()) {
             log.info("검증 오류 발생 errors={}", bindingResult);
+            // @RestController - 이 어노테이션때문에 반환값이 json 형식으로 바뀐다.
             return bindingResult.getAllErrors();
         }
 

@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 // @ScriptAssert(lang = "javascript", script = "_this.price * _this.quantity >= 10000")
+//  @ScriptAssert 는 기능이 약해서 필요하다면, 그 부분만 자바코드로 작성할 것을 실무에서는 권장한다.
 public class Item {
 
     // @NotNull(groups = UpdateCheck.class)

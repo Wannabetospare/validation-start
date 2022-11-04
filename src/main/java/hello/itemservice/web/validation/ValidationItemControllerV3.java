@@ -76,6 +76,7 @@ public class ValidationItemControllerV3 {
     }
 
     @PostMapping("/add")
+    // @Validated(SaveCheck.class) - 검증을 할 때 옵션을 먹인 필드만 검증한다.
     public String addItem2(@Validated(SaveCheck.class) @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         //특정 필드 예외가 아닌 전체 예외
@@ -131,6 +132,7 @@ public class ValidationItemControllerV3 {
     }
 
     @PostMapping("/{itemId}/edit")
+    // @Validated(UpdateCheck.class) - 검증을 할 때 옵션을 먹인 필드만 검증한다.
     public String editV2(@PathVariable Long itemId, @Validated(UpdateCheck.class) @ModelAttribute Item item, BindingResult bindingResult) {
 
         //특정 필드 예외가 아닌 전체 예외
@@ -141,6 +143,7 @@ public class ValidationItemControllerV3 {
             }
         }
 
+        // 에러가 존재한다면, bindingResult 된 모델값을 가지고, return 주소로 반환한다.
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
             return "validation/v3/editForm";

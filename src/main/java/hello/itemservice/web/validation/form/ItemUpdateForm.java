@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class ItemUpdateForm {
 
+    // id 가 있어야 지정한 객체를 수정할 수 있기 때문에
     @NotNull
     private Long id;
 

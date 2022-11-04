@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 
 // 아이템 저장용 폼 클래스
+// 저장할때는 id 가 필요없으므로 필드에 추가하지 않음
 @Data
 public class ItemSaveForm {
 

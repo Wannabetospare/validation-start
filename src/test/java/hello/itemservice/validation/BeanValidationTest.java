@@ -28,6 +28,7 @@ public class BeanValidationTest {
         for (ConstraintViolation<Item> violation : violations) {
             System.out.println("violation=" + violation);
             System.out.println("violation.message=" + violation.getMessage());
+            System.out.println("sdfdsfdsfsfds");
         }
     }
 }
